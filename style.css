@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&family=Open+Sans&display=swap');
+
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-image: radial-gradient(circle at 74.18% -16.45%, #fff9f1 0, #fff4ee 6.25%, #ffedeb 12.5%, #ffe6e8 18.75%, #ffdee5 25%, #ffd5e3 31.25%, #ffcbe1 37.5%, #fcc0df 43.75%, #f2b5de 50%, #e5abde 56.25%, #d7a3e0 62.5%, #c69de2 68.75%, #b498e5 75%, #9f96e7 81.25%, #8794e9 87.5%, #6c94eb 93.75%, #4a95eb 100%);
+	font-family: 'Open Sans', sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	overflow: hidden;
+	margin: 0;
+	color: #fff;
+}
+
+#main {
+	perspective: 700px;
+	transform-style: preserve-3d;
+}
+
+.user-form {
+	width: 100%;
+	max-width: 700px;
+}
+
+.user-form input {
+	font-family: 'Noto Serif', serif;
+	width: 100%;
+	display: block;
+	background-color: #9df9ef;
+	border: none;
+	border-radius: 10px;
+	padding: 1rem;
+	margin-bottom: 2rem;
+	font-size: 1rem;
+	box-shadow: 0 5px 10px rgba(154, 160, 135, 0.05), 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.user-form input::placeholder {
+	color: #a28089;
+}
+
+.user-form input:focus {
+	outline: none;
+}
+
+.card {
+	max-width: 800px;
+	background-color: #a28089;
+	border-radius: 20px;
+	transform-style: preserve-3d;
+	transition: transform 500ms ease-in-out;
+	box-shadow: 0 5px 10px rgba(154, 160, 135, 0.05), 0 15px 40px rgba(0, 0, 0, 0.2);
+	transform: rotateY(0deg);
+	transform-style: preserve-3d;
+	transition: 0.5s cubit-bezier(0.4, 0.2, 0.2, 1);
+	display: flex;
+	padding: 3rem;
+	margin: 0 1.5rem;
+}
+
+#main:hover .card {
+	transform: rotateY(10deg);
+}
+
+.user-info {
+	backface-visibility: hidden;
+}
+
+.user-info:hover {
+	transform: rotateY(0deg);
+}
+
+.avatar {
+	border-radius: 50%;
+	border: 10px solid #edf7f6;
+	height: 150px;
+	width: 150px;
+}
+
+.user-info {
+	color: #eee;
+	margin-left: 2rem;
+}
+
+.user-info h2 {
+	margin-top: 0;
+}
+
+.user-info ul {
+	list-style-type: none;
+	display: flex;
+	justify-content: space-between;
+	padding: 0;
+	max-width: 400px;
+}
