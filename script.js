@@ -11,12 +11,25 @@ async function getUser(username) {
 		} = await axios(APIURL + username);
 
 		createUserCard(data);
+		getRepos(username)
 	} catch (error) {
 		if (error.response.status == 404) {
 			createErrorCard('No hay usuario con este nombre');
 		}
 	}
+}
 
+async function getRepos(username) {
+	try {
+		const {
+			data
+		} = await axios(APIURL + username + '/repos?sort=created'); // ==> Ordenar los repositorios
+
+		addReposToCard(data);
+
+	} catch (error) {
+		createErrorCard('Problemas a recuperar repositorio');
+	}
 }
 
 function createUserCard({
@@ -42,15 +55,36 @@ function createUserCard({
 					<li>${public_repos } <strong> Repsitorios</strong></li>
 				</ul>
 
-				<div id="repos">
-					<a href="#" class="repo">Repo 2</a>
-					<a href="#" class="repo">Repo 1</a>
-					<a href="#" class="repo">Repo 3</a>
-				</div>
+				<div id="repos"></div>
 			</div>
 		</div>
 	`
 	main.innerHTML = cardHTML;
+}
+
+function createErrorCard(message) {
+	const cardHTML = `
+		<div class="card">
+			<h1>${message}</h1>
+		</div>
+	`
+	main.innerHTML = cardHTML;
+}
+
+function addReposToCard(repos) {
+	const reposEl = document.getElementById('repos');
+
+	repos
+		.slice(0, 10) // ==> Cortamos el arreglo en solo 10 elementos
+		.forEach(repo => {
+			const repoEL = document.createElement('a');
+			repoEL.classList.add('repo');
+			repoEL.href = repo.html_url;
+			repoEL.target = '_blanck';
+			repoEL.innerText = repo.name;
+
+			reposEl.appendChild(repoEL);
+		});
 }
 
 form.addEventListener('submit', (e) => {
